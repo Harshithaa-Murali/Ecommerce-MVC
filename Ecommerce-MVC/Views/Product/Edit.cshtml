@@ -1,0 +1,74 @@
+﻿@model Ecommerce_MVC.Models.Product
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<!DOCTYPE html>
+<html>
+<body>
+
+    <div class="row">
+        <div class="col-md-4">
+
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Pid" />
+                <div class="form-group">
+                    <label asp-for="Category" class="control-label">Category</label>
+                    <input readonly asp-for="Category" class="form-control" />
+                    <span asp-validation-for="Category" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SubCategory" class="control-label">Sub Category</label>
+                    <input readonly asp-for="SubCategory" class="form-control" />
+                    <span asp-validation-for="SubCategory" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ScType" class="control-label">Product Name</label>
+                    <input readonly asp-for="ScType" class="form-control" />
+                    <span asp-validation-for="ScType" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Size" class="control-label"></label>
+                    <input readonly asp-for="Size" class="form-control" />
+                    <span asp-validation-for="Size" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BrandId" class="control-label">Brand ID</label>
+                    <input readonly asp-for="BrandId" class="form-control" />
+                    <span asp-validation-for="BrandId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="InStock" class="control-label">In Stock</label>
+                    <input asp-for="InStock" class="form-control" />
+                    <span asp-validation-for="InStock" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price" class="control-label">Price (In Rupees)</label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Imglink" class="control-label">Image Link</label>
+                    <input asp-for="Imglink" class="form-control" />
+                    <span asp-validation-for="InStock" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+</body>
+</html>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

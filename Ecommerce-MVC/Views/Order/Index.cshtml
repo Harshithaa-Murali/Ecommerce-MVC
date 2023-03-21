@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Ecommerce_MVC.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<div>
+    <ul style="list-style-type: none;margin: 0;padding: 0;overflow: hidden;background-color:cadetblue;">
+        <li style="float:left"><a style="display: block;color: white;text-align: center;padding: 14px 16px;text-decoration: none;" class="active" asp-controller="Product" asp-action="Index" asp>Products</a></li>
+        <li style="float:left"><a style="display: block;color: white;text-align: center;padding: 14px 16px;text-decoration: none;" asp-controller="Order" asp-action="Index">Orders</a></li>
+        <li style="float:left"><a style="display: block;color: white;text-align: center;padding: 14px 16px;text-decoration: none;" asp-controller="Customer" asp-action="Index">Customers</a></li>
+    </ul>
+
+
+</div>
+
+<hr />
+<h1>Order Inventory</h1>
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>
+                Invoice
+            </th>
+            <th>
+                Pending Status
+            </th>
+            <th>
+                Bill Amount
+            </th>
+            <th>
+                Date Of order
+            </th>
+            <th>
+                Customer ID
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Invoice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PendingStatus)
+                </td>
+                <td>
+                    &#8377;@Html.DisplayFor(modelItem => item.BillAmmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfOrder)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cust.Cid)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.OrderId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.OrderId">Details</a> 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

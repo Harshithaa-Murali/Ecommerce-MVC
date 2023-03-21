@@ -1,0 +1,59 @@
+﻿@model Ecommerce_MVC.Models.Login
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h4>Customer Details</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label">Username cannot be changed</label>
+                <input asp-for="Username" readonly class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label hidden asp-for="Pwd" class="control-label"></label>
+            <input hidden asp-for="Pwd"  class="form-control" />
+            <span asp-validation-for="Pwd" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Cid" />
+            <div class="form-group">
+                <label asp-for="Cname" class="control-label">Customer Name</label>
+                <input asp-for="Cname" required type="text" class="form-control" />
+                <span asp-validation-for="Cname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Email ID</label>
+                <input asp-for="Email" required type="email"class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNo" class="control-label">Phone No</label>
+                <input asp-for="PhoneNo" required type="tel" class="form-control" />
+                <span asp-validation-for="PhoneNo" class="text-danger"></span>
+            </div>
+            @if (ViewBag.emsg != null)
+            {
+                <h6 style="color:red">@ViewBag.emsg</h6>
+            }
+            @if (ViewBag.smsg != null)
+            {
+                <h6 style="color:green">@ViewBag.smsg</h6>
+            }
+            <div class="form-group">
+                <input type="submit" asp-route-id="@ViewBag.cid" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

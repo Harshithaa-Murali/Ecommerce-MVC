@@ -1,0 +1,106 @@
+﻿<div style="background-color:mintcream;padding-left:30px;padding-right:30px;padding-top:30px;padding-bottom:30px">
+    @{
+
+        @model List<Product>
+        
+        <h2>@ViewBag.Cart</h2>
+        <hr />
+        List<string> l1 = new List<string>();
+        List<int> l2 = new List<int>();
+        List<int> l0 = new List<int>();
+        List<double> l3 = new List<double>();
+        double count = 0;
+
+        foreach (var item in Model)
+        {
+            <p style="float:left;padding-right:30px"><img width="100px" height="100px" src="@item.Imglink" /></p>
+            <P style="float:left">Product: #@item.Pid &nbsp;</P>
+            <p> @item.ScType</p>
+            <p>@item.Brand.BrandName</p>
+            <p>Rs.@item.Price</p>
+            <p>Quantity: @ViewBag.qty[item.Pid]</p>
+
+            l1.Add(item.ScType);
+            l0.Add(item.Pid);
+            l2.Add(@ViewBag.qty[item.Pid]);
+            count = count + Convert.ToDouble(@item.Price) * (@ViewBag.qty[item.Pid]);
+            l3.Add(Convert.ToDouble(@item.Price) * (@ViewBag.qty[item.Pid]));
+
+            <a asp-controller="Home" asp-action="RemoveFromCart" asp-route-id="@item.Pid">Remove</a>
+            <hr />
+        }
+
+        int k = l1.Count() - 1;
+        string pids = "";
+        @while (k >= 0)
+        {
+            pids = pids + Convert.ToString(l0[k]) + ";";
+            k--;
+        }
+        @if (CategoryVM.cart.Count != 0)
+        {
+
+            <table border="1" cellpadding="10" cellspacing="5">
+                <h5>Cart Subtotal</h5>
+                @for (int j = 0; j < @Model.Count(); j++)
+                {
+                    <tr>
+                        <td>@l1[j]&nbsp;</td>
+                        <td>x @l2[j]&nbsp;</td>
+                        <td>Rs.@l3[j]</td>
+                    </tr>
+                }
+                <hr>
+                <tr>
+                <tr>
+                    <td>Taxes and Delivery</td>
+                    <td></td>
+                    <td>Rs.67.5</td>
+                </tr>
+                    @if (count > 500)
+                    {
+                        count = count * 0.4;
+                        count = count + 67.5;
+                    <td>
+                        Discount
+                    </td>
+                    <td></td>
+                    <td> - @ViewBag.disc %</td>
+                    }
+                    else
+                    {
+                    <tr>
+                        <td>
+                            Discount
+                        </td>
+                        <td></td>
+                        <td> - 0%</td>
+                        <p style="color:red">Offer valid on min Rs 500</p>
+                    </tr>
+                        count = @count + 67.5;
+                    }
+                </tr>
+
+
+                <tr>
+                    <th style="text-align:right;">Total: Rs.@count</th>
+                </tr>
+
+            </table>
+
+            <br />
+            <button style="color:cornflowerblue;width:100px;height:50px"><a style="color:black;text-decoration:none" asp-controller="Payments" asp-action="ModeOfPayment" asp-route-pids="@pids" asp-route-oid="@count">Checkout </a></button>
+        }
+        else
+        {
+            <h6>Cart is empty</h6>
+            <p>Add Products to cart</p>
+        }
+        <br>
+
+        <br>
+        <button><a style="color:black;text-decoration:none" asp-route-disc="60" asp-action="DisplayList">Back to home page</a></button>
+        <br />
+    }
+</div>
+

@@ -1,0 +1,48 @@
+﻿@model Ecommerce_MVC.Models.Order
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Invoice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Invoice)
+        </dd>
+        <dt class="col-sm-2">
+            Pending Status
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PendingStatus)
+        </dd>
+        <dt class="col-sm-2">
+            Bill Amount
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BillAmmount)
+        </dd>
+        <dt class="col-sm-2">
+            Date Of Order
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateOfOrder)
+        </dd>
+        <dt class = "col-sm-2">
+            Customer Name
+        </dt>
+        <dd class = "col-sm-10">
+        @Html.DisplayFor(model => model.Cust.Cname)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.OrderId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

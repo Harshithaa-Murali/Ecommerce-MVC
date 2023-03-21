@@ -1,0 +1,37 @@
+﻿@model List<Ecommerce_MVC.Models.Order>
+
+@{
+    ViewData["Title"] = "Details";
+    List<OrderDetail> products = ViewBag.prod;
+}
+
+<h1>Details</h1>
+<div style="background-color:mintcream;padding-left:30px;padding-right:30px;padding-top:30px;padding-bottom:30px">
+    <h4>Order</h4>
+    <hr />
+    <table>
+        @foreach (var item in Model)
+        {
+            <tr>Invoice: @item.Invoice </tr>
+            <br />
+            <tr>Bill Amount: Rs @item.BillAmmount </tr>
+            <br />
+            <tr>Order ID: @item.OrderId </tr>
+            <br />
+            <tr>Order Date : @item.DateOfOrder </tr><br /> 
+            <tr>Products: </tr>
+            @foreach(var i in products)
+            {
+                if(i.OrderId == @item.OrderId)
+                {
+                    <li>@i.PidNavigation.ScType x @i.Qty</li>
+                }
+            }
+            <br />
+            <hr />
+        }
+    </table>
+
+</div>
+<div>
+</div>

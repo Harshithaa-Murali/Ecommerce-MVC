@@ -1,0 +1,77 @@
+﻿@model Ecommerce_MVC.Models.Product
+@{
+    ViewData["Title"] = "Create";
+}
+<h1>Create</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (ViewBag.emsg != null)
+            {
+                <h6 style="color:red">@ViewBag.emsg</h6>
+            }
+            <div class="form-group">
+                <label asp-for="Pid" class="control-label">Product ID</label>
+                <input required type="number" asp-for="Pid" class="form-control" />
+                <span asp-validation-for="Pid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Category" class="control-label">Category</label>
+                <input required asp-for="Category" class="form-control" />
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubCategory" class="control-label">Sub Category</label>
+                <input required asp-for="SubCategory" class="form-control" />
+                <span asp-validation-for="SubCategory" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScType" class="control-label">Product Name</label>
+                <input required asp-for="ScType" class="form-control" />
+                <span asp-validation-for="ScType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Size" class="control-label"></label>
+                <input asp-for="Size" class="form-control" />
+                <span asp-validation-for="Size" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BrandId" class="control-label">Brand ID</label>
+                <select style="appearance:menulist" required name="BrandId" asp-for="BrandId" class="form-control" asp-items="@ViewBag.BrandId"><option selected disabled>Select Brand ID</option></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="InStock" class="control-label">In Stock</label>
+                <input required type="number" asp-for="InStock" class="form-control" />
+                <span asp-validation-for="InStock" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label">Price (In Rupees)</label>
+                <input required type="number" asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Imglink" class="control-label">Image Link</label>
+                <input asp-for="Imglink" class="form-control" />
+                <span asp-validation-for="Imglink" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

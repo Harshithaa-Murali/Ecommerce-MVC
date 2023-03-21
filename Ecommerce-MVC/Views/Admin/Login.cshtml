@@ -1,0 +1,57 @@
+﻿@model Ecommerce_MVC.Models.Admin
+
+@{
+    ViewData["Title"] = "Login";
+}
+<head>
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+</head>
+<body>
+    @if(ViewBag.em != null)
+    {
+        <p style="color:red">@ViewBag.em</p>
+    }
+    <div  class="login-page">
+        <div class="form">
+            <div class="login">
+                <div class="login-header">
+                    <h3 style="text-align:center">Admin Login</h3>
+                    <p>Please enter your credentials to login.</p>
+                </div>
+            </div>
+            <form asp-action="Login">
+                <div class="form-group">
+                    <label asp-for="Username" class="control-label">Username</label>
+                    <input asp-for="Username" required class="form-control" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Pwd" class="control-label">Password</label>
+                    <input asp-for="Pwd" type="password" required class="form-control" />
+                    <span asp-validation-for="Pwd" class="text-danger"></span>
+                </div>
+                @{
+                    if (ViewBag.ErrorMessage != null)
+                    {
+                        <p style="color:red">@ViewBag.ErrorMessage</p>
+                    }
+                }
+                <div class="form-group">
+                    <input type="submit" value="Login" class="btn btn-primary" />
+                </div>
+
+            </form>
+        </div>
+    </div>
+</body>
+
+
+@*<div>
+    <a asp-action="Index">Back to List</a>
+</div>*@
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,50 @@
+﻿@*@model IEnumerable<ECommerceMVC.Models.Product>
+
+*@
+<div style="background-color:mintcream;padding-left:30px;padding-right:30px;padding-top:30px;padding-bottom:30px">
+
+    @model IEnumerable<Ecommerce_MVC.Models.CategoryVM>
+    <table class="table">
+        @for (int item = 0; item < CategoryVM.st.Count(); item++)
+        {
+            var l2 = ViewBag.bnames;
+            <tr>
+                <th style="font-weight:40px"> @CategoryVM.st[item].Category</th>
+                @for (int it = 0; it < CategoryVM.st[item].Prods.Count(); it++)
+                {
+                    if (@CategoryVM.st[item].Prods[it].InStock > 0)
+                    {
+                        ViewBag.Stock = "Available";
+                    }
+                    else
+                    {
+                        ViewBag.Stock = "Unavailable";
+                    }
+                <tr>
+
+                    <td> @CategoryVM.st[item].Prods[it].SubCategory</td>
+                    <td><img width="200px" height="200px" src="@CategoryVM.st[item].Prods[it].Imglink" /></td>
+                    <td> @CategoryVM.st[item].Prods[it].ScType</td>
+                    <td> @CategoryVM.st[item].Prods[it].Size</td>
+                    <td> Rs.@CategoryVM.st[item].Prods[it].Price</td>
+                    <td> @ViewBag.Stock</td>
+                    <td>@l2[item][it]</td>
+                    <td>
+                            @if (@CategoryVM.st[item].Prods[it].InStock > 0)
+                            {
+                            <a asp-action="AddToCart" asp-route-disc="@ViewBag.disc" asp-route-id="@CategoryVM.st[item].Prods[it].Pid ">Add To Cart</a>
+                            }
+                            else
+                            {
+                            <p style="color:gray">Out Of order</p>
+                            }
+                    </td>
+                </tr>
+                }
+            </tr>
+        }
+    </table>
+</div>
+
+
+

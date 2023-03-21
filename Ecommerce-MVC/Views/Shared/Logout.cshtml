@@ -1,0 +1,77 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+<head>
+    <script type="text/javascript">
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+    </script>
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+</head>
+<ul class="navbar-nav">
+    @{
+        ViewBag.Data = HttpContextAccessor.HttpContext.Session.GetString("username");
+        ViewBag.AData = HttpContextAccessor.HttpContext.Session.GetString("Ausername");
+        //ViewBag.data = "Hello";
+        //layout
+    }
+    @if (ViewBag.data != null && ViewBag.data != "")
+    {
+        <li class="nav-item">
+            <a style="color:black;text-decoration:none" class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="MyCart"><span style="font-size:17px;">&nbsp;@CategoryVM.cart.Count()</span><i style="font-size:x-large" class='fa fa-shopping-cart'></i></a>
+        </li>
+        <li style="z-index:99;opacity:100%" class="dropdown nav-item">
+            <a style="color:black;text-decoration:none" class="dropdown-toggle nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">My Account </a>
+            <div class="dropdown-content">
+                <a style="color:black;text-decoration:none" asp-controller="Customer" asp-action="Edit">Account Details</a>
+                @*<a asp-controller="Home" asp-action="MyCart">My Cart</a>*@
+                <a style="color:black;text-decoration:none"  asp-controller="Customer" asp-action="OrderDetails">Order History</a>
+
+
+            </div>
+        </li>
+        
+        <li class="nav-item">
+            <a style="color:black;text-decoration:none" class="nav-link text-dark" asp-controller="Home" asp-action="DisplayList" title="Manage">Hello @ViewBag.Data</a>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline">
+                <button style="color:black;text-decoration:none;font-size:inherit" asp-area="" type="submit" onclick="confirmlogout()" client class="nav-link btn btn-link text-dark">Logout</button>
+            </form>
+            @*<a onclick="confirmlogout()" asp-controller="Login" asp-action="Logout">Logout</a>*@
+        </li>
+    }
+    else if(ViewBag.Adata != null && ViewBag.Adata != "")
+    {
+        
+        <li class="nav-item">
+            <a style="color:black;text-decoration:none" class="nav-link text-dark" asp-controller="Product" asp-action="Index"  title="Manage">Hello @ViewBag.Adata</a>
+        </li>
+        <li class="nav-item">
+            <a style="color:black;text-decoration:none" class="nav-link text-dark" asp-controller="Product" asp-action="Index" title="Manage">Inventory</a>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline">
+                <button style="color:black;text-decoration:none;font-size:inherit" type="submit" asp-controller="Admin" asp-action="Logout" client class="nav-link btn btn-link text-dark">Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Login" asp-action="Login">Login</a>
+        </li>
+    }
+</ul>
+<script>
+    function confirmlogout(){
+        //e.PreventDefault();
+        if(confirm("You will lose your cart content. Are you sure?")==true){
+            window.location.href="@Url.Action("Logout","Login")";
+        }
+        else{
+
+        }
+    }
+</script>
